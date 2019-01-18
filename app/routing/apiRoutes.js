@@ -4,13 +4,13 @@
 var friendsData = require("../data/friends");
 
 //exporting api routes to server.js
-module.exports = function (app) {
+module.exports = (app) => {
     //this gets the friends object when user looks at the JSON object
-    app.get("/api/friends", function (req, res) {
+    app.get("/api/friends",  (req, res) => {
         res.json(friendsData);
     });
     // Create new friend- takes in JSON input
-    app.post("/api/friends", function (req, res) {
+    app.post("/api/friends",  (req, res) => {
         var newfriend = req.body;
         // Using a RegEx Pattern to remove spaces from newCharacter
         newfriend.routeName = newfriend.name.replace(/\s+/g, "").toLowerCase();
