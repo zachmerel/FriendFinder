@@ -15,36 +15,24 @@ module.exports = (app) => {
         // Using a RegEx Pattern to remove spaces from newCharacter
         newfriend.routeName = newfriend.name.replace(/\s+/g, "").toLowerCase();
 
-        console.log("newfriend", newfriend);
-
-
-        console.log(newfriend.scores);
         for (var i = 0; i < newfriend.scores.length; i++) { newfriend.scores[i] = parseInt(newfriend.scores[i]); };
-        console.log(newfriend.scores);
         var newFriendSum = (newfriend.scores).reduce((a, b) => a + b);
-        console.log("newFriendSum", newFriendSum);
         let userSums = [];
         for (var i = 0; i < friendsData.length; i++) {
             var currentFriendSum = (friendsData[i].scores).reduce((a, b) => a + b);
             userSums.push(currentFriendSum);
-            console.log(userSums)
-            console.log("currentFriendSum", currentFriendSum);
         };
         let absValues = [];
         for (var i = 0; i < userSums.length; i++) {
            
             let abs = Math.abs(userSums[i] - newFriendSum);
             absValues.push(abs);
-            console.log("absValues", absValues);
         }
         let min = Math.min(...absValues)
 
-        console.log("minimum absValue", min);
-
         let smallestNumIndex = absValues.indexOf(min);
-        console.log(smallestNumIndex);
-
-
+        
+        
         friendsData.push(newfriend);
         res.json(friendsData[smallestNumIndex]);
     });
